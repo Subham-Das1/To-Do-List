@@ -23,7 +23,11 @@ Welcome to the To-Do List application! This project allows users to manage their
 
 ## Usage
 Open the application in your web browser.
+
 Enter a task title and select a due date.
+
 Click the "Add Task" button to add the task to your list.
+
 Use the buttons next to each task to mark it as complete, edit it, or delete it.
+
 The task list will automatically save in local storage for future sessions.
