@@ -175,3 +175,149 @@ button {
 .couldnt-complete{
     margin-left: 20px;
 }
+
+@media (max-width: 1200px) {
+    body {
+        justify-content: center;
+        position: relative;
+    }
+
+    .header {
+        padding: 15px;
+    }
+
+    .box {
+        height: 70px;
+        width: 70px;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        justify-content: center;
+        position: relative;
+    }
+
+    .header {
+        padding: 10px;
+        width: max-content;
+    }
+
+    .header h1{
+        font-size: 1.5rem;
+    }
+
+    .header input{
+        font-size: 18px;
+    }
+
+    .add{
+        padding: 5px;
+        font-size: medium;
+    }
+
+    .clear{
+        padding: 8px;
+        font-size: 0.7rem;
+    }
+
+    .box-row {
+        gap: 10px;
+    }
+
+    .herosection{
+        margin-bottom: 15px;
+    }
+
+    .date {
+        margin-bottom: 15px;
+    }
+
+    .date input {
+        padding: 5px;
+        font-size: 15px;
+    }
+
+    .time input{
+        font-size: 15px;
+    }
+
+    #chatInput{
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        justify-content: center;
+        position: relative;
+    }
+
+    .header {
+        padding: 10px;
+    }
+
+    .box {
+        height: 40px;
+        width: 40px;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header input {
+        font-size: 13px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .add{
+        padding: 5px;
+        font-size: medium;
+    }
+
+    .date input {
+        padding: 5px;
+        font-size: 15px;
+    }
+    .time input{
+        font-size: 15px;
+    }
+    #chatInput{
+        padding-left: 10px;
+    }
+}
+
+@media (max-width: 375px) {
+    body {
+        justify-content: center;
+        position: relative;
+    }
+
+    .header h1 {
+        font-size: 1.2rem;
+    }
+
+    .header input {
+        font-size: 12px;
+    }
+
+    .box {
+        height: 40px;
+        width: 40px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    #chatInput{
+        padding-left: 8px;
+    }
+}
+
