@@ -171,3 +171,7 @@ button {
 .time input{
     padding: 5px;
 }
+
+.couldnt-complete{
+    margin-left: 20px;
+}
