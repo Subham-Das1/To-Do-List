@@ -245,6 +245,11 @@ button {
     #chatInput{
         padding-left: 10px;
     }
+
+    .box {
+        flex: 1 1 calc(100% / 15 - 5px); 
+        max-width: calc(100% / 15 - 5px);
+    }
 }
 
 @media (max-width: 576px) {
@@ -258,8 +263,9 @@ button {
     }
 
     .box {
-        height: 40px;
-        width: 40px;
+        flex: 1 1 calc(100% / 17 - 5px); 
+        max-width: calc(100% / 17 - 5px);
+        aspect-ratio: 1;
     }
 
     .header h1 {
@@ -307,10 +313,11 @@ button {
     }
 
     .box {
-        height: 40px;
-        width: 40px;
+        flex: 1 1 calc(100% / 17 - 5px); 
+        max-width: calc(100% / 17 - 5px);
+        aspect-ratio: 1;
     }
-
+    
     button {
         font-size: 12px;
         padding: 6px;
