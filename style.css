@@ -1,77 +1,3 @@
-/* body {
-    background: linear-gradient(to bottom, #181818 48%, red 49%, red 51%, #181818 52%);
-    background-size: 100% 200%;
-    animation: red-line-move 5s infinite ease-in-out;
-    height: 96vh;
-    display: flex;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-@keyframes red-line-move {
-    0% {
-        background-position: 0% 100%; 
-    }
-    60% {
-        background-position: 0% 0%; 
-    }
-    80%{
-        background-position: 0% -60%;  
-    }
-    100% {
-        background-position: 0% -100%; 
-    }
-}
-*/
-.header {
-    background-color: rgba(255, 255, 255, 0.749);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 490px;
-    height: max-content;
-    padding: 20px;
-    margin-top: 20px;
-    border-radius: 20px;
-    z-index: 1;
-    max-height: 600px;
-    overflow-y: auto;
-    color: #000;
-} 
-/*
-.container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 0;
-    margin-top: 8px;
-}
-
-.box-row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 5px;
-}
-
-.box {
-    flex: 1 1 calc(100% / 15 - 5px); 
-    max-width: calc(100% / 15 - 5px);
-    aspect-ratio: 1;
-    background-color: #101010;
-    transition: background-color 0.3s ease;
-}
-
-.box:hover {
-    background-color: red;
-} */
-
 * {
     padding: 0;
   }
@@ -95,6 +21,22 @@
     border: none;
     z-index: 0;
 }
+
+.header {
+    background-color: rgba(255, 255, 255, 0.749);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 490px;
+    height: max-content;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 20px;
+    z-index: 1;
+    max-height: 600px;
+    overflow-y: auto;
+    color: #000;
+} 
 
 .header h1 {
     margin-bottom: 15px;
@@ -259,6 +201,7 @@ button {
 @media (max-width: 576px) {
     .header {
         padding: 10px;
+        max-width: 230px;
     }
 
     .header h1 {
@@ -292,6 +235,10 @@ button {
 }
 
 @media (max-width: 375px) {
+    .header{
+        max-width: 230px;
+    }    
+
     .header h1 {
         font-size: 1.2rem;
     }
