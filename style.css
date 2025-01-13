@@ -213,6 +213,12 @@ button {
     .list ul li {
         margin-left: 20px;
     }
+
+    .task-text{
+        word-wrap: break-word; 
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
 }
 
 @media (max-width: 576px) {
@@ -256,6 +262,9 @@ button {
 
     .task-text{
         font-size: 15px;
+        word-wrap: break-word; 
+        overflow-wrap: break-word;
+        white-space: normal;
     }
 
     #list li::marker {
@@ -285,4 +294,3 @@ button {
         padding-left: 8px;
     }
 }
-
