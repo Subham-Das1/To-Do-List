@@ -219,6 +219,10 @@ button {
         overflow-wrap: break-word;
         white-space: normal;
     }
+
+    .header input{
+        max-width: 220px;
+    }
 }
 
 @media (max-width: 576px) {
