@@ -58,6 +58,11 @@ function addTaskToList(text, date, time) {
     var li = document.createElement('li');
     li.className = 'task-item';
 
+    if (text.length > 50) {
+        alert("Max characters exceeded!");
+        return;
+    }
+
     // Create a container for task text
     var taskText = document.createElement('div');
     taskText.className = 'task-text';
