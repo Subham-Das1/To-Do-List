@@ -37,7 +37,6 @@
     overflow-y: auto;
     color: #000;
 } 
-
 .header h1 {
     margin-bottom: 15px;
     margin-top: 0;
@@ -79,6 +78,7 @@
 
 #chatInput {
     padding-left: 15px;
+    padding-right: 5px;
 }
 
 button {
@@ -273,6 +273,10 @@ button {
 
     .action-buttons{
         gap: 8px;
+    }
+    
+    .header input{
+        max-width: 170px;
     }
 }
 
