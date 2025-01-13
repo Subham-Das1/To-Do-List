@@ -114,13 +114,13 @@ button {
 
 .list {
     font-family: Arial;
-    font-size: large;
 }
 
 .list ul li {
     margin-top: 10px;
     position: relative;
-    padding-right: 50px;
+    text-align: left;
+    margin-left: 60px;
 }
 
 .clear {
@@ -139,11 +139,16 @@ button {
     padding: 5px;
 }
 
-.couldnt-complete{
-    margin-left: 20px;
+#list {
+    list-style-type: square; 
+    font-size: 24px;
 }
 
-
+.action-buttons{
+    display: flex;
+    margin-top: 5px;
+    gap: 20px;
+}
 
 @media (max-width: 1200px) {
 
@@ -196,6 +201,18 @@ button {
     #chatInput{
         padding-left: 10px;
     }
+
+    #list{
+        font-size: 17px;
+    }
+
+    #list li::marker {
+        font-size: 17px;  
+    }
+
+    .list ul li {
+        margin-left: 20px;
+    }
 }
 
 @media (max-width: 576px) {
@@ -214,7 +231,7 @@ button {
 
     button {
         font-size: 14px;
-        padding: 8px;
+        padding: 7px;
     }
 
     .add{
@@ -232,13 +249,25 @@ button {
     #chatInput{
         padding-left: 10px;
     }
+
+    .list ul li {
+        margin-left: 20px;
+    }
+
+    .task-text{
+        font-size: 15px;
+    }
+
+    #list li::marker {
+        font-size: 15px;  
+    }
+
+    .action-buttons{
+        gap: 8px;
+    }
 }
 
 @media (max-width: 375px) {
-    .header{
-        max-width: 240px;
-    }    
-
     .header h1 {
         font-size: 1.2rem;
     }
@@ -256,3 +285,4 @@ button {
         padding-left: 8px;
     }
 }
+
