@@ -36,7 +36,8 @@
     max-height: 600px;
     overflow-y: auto;
     color: #000;
-} 
+}
+
 .header h1 {
     margin-bottom: 15px;
     margin-top: 0;
@@ -87,6 +88,8 @@ button {
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    font-weight: bolder;
+    font-size: 14px;
 }
 
 .add {
@@ -240,7 +243,7 @@ button {
     }
 
     button {
-        font-size: 14px;
+        font-size: 12px;
         padding: 7px;
     }
 
@@ -278,7 +281,7 @@ button {
     .action-buttons{
         gap: 8px;
     }
-    
+
     .header input{
         max-width: 156px;
     }
