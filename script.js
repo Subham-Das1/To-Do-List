@@ -1,5 +1,6 @@
 // Store the last few tasks to prevent consecutive duplicates
 var recentTasks = [];
+var recentDeletedTasks = []; 
 
 // Load tasks from local storage on page load
 document.addEventListener('DOMContentLoaded', function () {
@@ -35,11 +36,15 @@ document.getElementById('addlist').addEventListener('click', function () {
         if (dateInput < today || (dateInput === today && timeInput < currentTime)) {
             alert('Date and time cannot be in the past');
         } else {
-            if (recentTasks.includes(chatInput)) {
+            // Check if task is recently added or recently deleted
+            if (recentTasks.includes(chatInput) && !recentDeletedTasks.includes(chatInput)) {
                 alert('This task was recently added. Please add a different task.');
             } else {
                 addTaskToList(chatInput, dateInput, timeInput);
                 recentTasks.push(chatInput);
+
+                // Remove from recentDeletedTasks if re-added
+                recentDeletedTasks = recentDeletedTasks.filter(task => task !== chatInput);
 
                 // Keep only the last two recent tasks
                 if (recentTasks.length > 2) {
@@ -66,7 +71,7 @@ function addTaskToList(text, date, time) {
     // Create a container for task text
     var taskText = document.createElement('div');
     taskText.className = 'task-text';
-    taskText.textContent = `${text} in ${date} in ${time}`;
+    taskText.innerHTML = `${text} in ${date} in ${time}`;
 
     // Create a container for action buttons
     var actionButtons = document.createElement('div');
@@ -80,6 +85,8 @@ function addTaskToList(text, date, time) {
         li.style.color = 'green';
         completedBtn.style.display = 'none';
         couldntCompleteBtn.style.display = 'none';
+        editBtn.style.display = 'none';
+        deleteBtn.style.display = 'none';
         saveTasksToLocalStorage();
     });
 
@@ -91,11 +98,43 @@ function addTaskToList(text, date, time) {
         li.style.color = 'red';
         completedBtn.style.display = 'none';
         couldntCompleteBtn.style.display = 'none';
+        editBtn.style.display = 'none';
+        deleteBtn.style.display = 'none';
         saveTasksToLocalStorage();
+    });
+
+    var editBtn = document.createElement('button');
+    editBtn.className = 'edit';
+    editBtn.innerHTML = '<i class="fas fa-edit"></i>';
+    editBtn.addEventListener('click', function () {
+        var currentText = text;
+        var currentDate = date;
+        var currentTime = time;
+
+        var newText = prompt("Update task text:", currentText) || currentText;
+        var newDate = prompt("Update date:", currentDate) || currentDate;
+        var newTime = prompt("Update time:", currentTime) || currentTime;
+
+        taskText.innerHTML = `${newText} in ${newDate} in ${newTime}`;
+        saveTasksToLocalStorage();
+    });
+
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'delete';
+    deleteBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
+    deleteBtn.addEventListener('click', function () {
+        if (confirm('Are you sure you want to delete this task?')) {
+            list.removeChild(li); 
+            recentDeletedTasks.push(text);
+            recentTasks = recentTasks.filter(task => task !== text); 
+            saveTasksToLocalStorage();
+        }
     });
 
     actionButtons.appendChild(completedBtn);
     actionButtons.appendChild(couldntCompleteBtn);
+    actionButtons.appendChild(editBtn);
+    actionButtons.appendChild(deleteBtn);
 
     li.appendChild(taskText);
     li.appendChild(actionButtons);
@@ -118,5 +157,6 @@ document.getElementById('clearAll').addEventListener('click', function () {
         localStorage.removeItem('tasks');
         document.getElementById('list').innerHTML = '';
         recentTasks = [];
+        recentDeletedTasks = [];
     }
 });
