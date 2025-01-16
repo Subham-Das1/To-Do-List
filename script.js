@@ -6,7 +6,7 @@ var recentDeletedTasks = [];
 document.addEventListener('DOMContentLoaded', function () {
     var savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
     savedTasks.forEach(function (task) {
-        addTaskToList(task.text, task.date, task.time);
+        addTaskToList(task.text, task.date, task.time, task.status);
     });
 });
 
@@ -36,21 +36,15 @@ document.getElementById('addlist').addEventListener('click', function () {
         if (dateInput < today || (dateInput === today && timeInput < currentTime)) {
             alert('Date and time cannot be in the past');
         } else {
-            // Check if task is recently added or recently deleted
             if (recentTasks.includes(chatInput) && !recentDeletedTasks.includes(chatInput)) {
                 alert('This task was recently added. Please add a different task.');
             } else {
-                addTaskToList(chatInput, dateInput, timeInput);
+                addTaskToList(chatInput, dateInput, timeInput, 'pending');
                 recentTasks.push(chatInput);
-
-                // Remove from recentDeletedTasks if re-added
                 recentDeletedTasks = recentDeletedTasks.filter(task => task !== chatInput);
-
-                // Keep only the last two recent tasks
                 if (recentTasks.length > 2) {
                     recentTasks.shift();
                 }
-
                 saveTasksToLocalStorage();
             }
         }
@@ -58,7 +52,7 @@ document.getElementById('addlist').addEventListener('click', function () {
 });
 
 // Function to add task to the list
-function addTaskToList(text, date, time) {
+function addTaskToList(text, date, time, status = 'pending') {
     var list = document.getElementById('list');
     var li = document.createElement('li');
     li.className = 'task-item';
@@ -68,12 +62,10 @@ function addTaskToList(text, date, time) {
         return;
     }
 
-    // Create a container for task text
     var taskText = document.createElement('div');
     taskText.className = 'task-text';
     taskText.innerHTML = `${text} in ${date} in ${time}`;
 
-    // Create a container for action buttons
     var actionButtons = document.createElement('div');
     actionButtons.className = 'action-buttons';
 
@@ -83,10 +75,8 @@ function addTaskToList(text, date, time) {
     completedBtn.addEventListener('click', function () {
         li.style.textDecoration = 'line-through';
         li.style.color = 'green';
-        completedBtn.style.display = 'none';
-        couldntCompleteBtn.style.display = 'none';
-        editBtn.style.display = 'none';
-        deleteBtn.style.display = 'none';
+        actionButtons.innerHTML = '';
+        li.dataset.status = 'completed';
         saveTasksToLocalStorage();
     });
 
@@ -96,10 +86,8 @@ function addTaskToList(text, date, time) {
     couldntCompleteBtn.addEventListener('click', function () {
         li.style.textDecoration = 'line-through';
         li.style.color = 'red';
-        completedBtn.style.display = 'none';
-        couldntCompleteBtn.style.display = 'none';
-        editBtn.style.display = 'none';
-        deleteBtn.style.display = 'none';
+        actionButtons.innerHTML = '';
+        li.dataset.status = 'couldnt-complete';
         saveTasksToLocalStorage();
     });
 
@@ -110,11 +98,9 @@ function addTaskToList(text, date, time) {
         var currentText = text;
         var currentDate = date;
         var currentTime = time;
-
         var newText = prompt("Update task text:", currentText) || currentText;
         var newDate = prompt("Update date:", currentDate) || currentDate;
         var newTime = prompt("Update time:", currentTime) || currentTime;
-
         taskText.innerHTML = `${newText} in ${newDate} in ${newTime}`;
         saveTasksToLocalStorage();
     });
@@ -131,13 +117,22 @@ function addTaskToList(text, date, time) {
         }
     });
 
-    actionButtons.appendChild(completedBtn);
-    actionButtons.appendChild(couldntCompleteBtn);
-    actionButtons.appendChild(editBtn);
-    actionButtons.appendChild(deleteBtn);
+    if (status === 'completed') {
+        li.style.textDecoration = 'line-through';
+        li.style.color = 'green';
+    } else if (status === 'couldnt-complete') {
+        li.style.textDecoration = 'line-through';
+        li.style.color = 'red';
+    } else {
+        actionButtons.appendChild(completedBtn);
+        actionButtons.appendChild(couldntCompleteBtn);
+        actionButtons.appendChild(editBtn);
+        actionButtons.appendChild(deleteBtn);
+    }
 
     li.appendChild(taskText);
     li.appendChild(actionButtons);
+    li.dataset.status = status;
     list.appendChild(li);
 }
 
@@ -146,7 +141,7 @@ function saveTasksToLocalStorage() {
     var tasks = Array.from(document.querySelectorAll('#list .task-item')).map(li => {
         var taskText = li.querySelector('.task-text').textContent;
         var [text, date, time] = taskText.split(' in ');
-        return { text: text, date: date, time: time };
+        return { text, date, time, status: li.dataset.status };
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
